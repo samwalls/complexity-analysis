@@ -3,6 +3,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{algorithm2e}
 \usepackage{dsfont}
+\usepackage{amsmath}
 
 %opening
 \title{CS3052 - Computational Complexity -\\Analysis of the Discrete Fourier Transform}
@@ -25,8 +26,8 @@ First, the algorithm in question is shown in pseudocode in figure \ref{alg:dft}.
 	\For{$j = 0$; $j < N$}{
 		$Y_j = 0$\\
 		\For{$k = 0$; $k < N$}{
-			$z = x_k e^{-2kn\pi i / N} = x_n(\cos(\frac{-2kn\pi}{N}) + i \sin(\frac{-2kn\pi}{N}))$\\
-			$Y_j \leftarrow Y_j + z$\\
+			$z = e^{-2jk\pi i / N} = \cos(\frac{-2jk\pi}{N}) + i \sin(\frac{-2jk\pi}{N})$\\
+			$Y_j \leftarrow Y_j + zx_k$\\
 			$k \leftarrow k + 1$\\
 		}
 		$j \leftarrow j + 1$\\
@@ -39,9 +40,10 @@ For this algorithm, the worst-case time complexity is quite clear. As can be see
 	
 Knowing that the code within the loop does not break at an early point - we can say that the time taken for an input list of size $n$, $T(n)$, is at the least, proportional to $n^2$. The evaluation of the inner loop will be of a constant factor, this is because the operations, $\sin$, $\cos$, addition, multiplication etc. will always take the same time within this context. I.e. we do not use arbitrary precision floating point numbers, the size is \emph{fixed}. So, it is reasonable to say that the inner loop is of a constant order complexity.
 
-Now we know that: the inner loop will always run $N^2$ times; and that the evaluation of the inner loop is of the order $O(1)$ with respect to a single element of the input list. With all of these facts in mind, it is reasonable to assume that the naive DFT algorithm is of the order $O(n^2)$ in the worst case, where $n$ is the length of the input list. Not only this, but the average case, and even the best case, should be more or less the same as the worst case - this is because there is no room for pathological behaviour in the algorithm, it \emph{always} runs the inner loop $N^2$ times. That is to say, the algorithm is $\Omega(n^2)$, and $O(n^2)$, thus also $\Theta(n^2)$.
+Now we know that: the inner loop will always run $N^2$ times; and that the evaluation of the inner loop is of the order $O(1)$ with respect to a single element of the input list. With all of these facts in mind, it is reasonable to assume that the naive DFT algorithm is of the order $O(n^2)$, where $n$ is the length of the input list. Not only this, but the average case, and even the best case, should be asymptotically the same as the worst case - this is because there is no room for pathological behaviour in the algorithm, it \emph{always} runs the inner loop $N^2$ times. That is to say, the algorithm is $\Omega(n^2)$, and $O(n^2) \Rightarrow \Theta(n^2)$.
 
-\subsection{Average Case Analysis}
+\subsection{Average Case Analysis}\label{sec:dft-average}
+TODO show plot and explain.
 
 \section{FFT Analysis}\label{sec:fft}
 
@@ -52,42 +54,71 @@ As before, the algorithm in question is shown in pseudocode in figure \ref{alg:f
 	\If{N = 1}{
 		\Return $x_0$
 	}
-	\If{}{
-		\Return error: $N$ should be even
+	\If{$N$ is not even}{
+		\Return error: $N$ should be a power of two
 	}
 	$q = \verb|FFT(all even terms in input list)|$\\
 	$r = \verb|FFT(all odd terms in input list)|$\\
-	Y
-	\For{$j = 0$; $j < N/2$}{
-		$z = r_n e^{-2kn\pi i / N} = x_n(\cos(\frac{-2kn\pi}{N}) + i \sin(\frac{-2kn\pi}{N}))$\\
-		$Y_j \leftarrow Y_j + z$\\
-		$Y_{j + N/2} \leftarrow Y_j - z$\\
-		$j \leftarrow j + 1$\\
+	$Y = \verb|the empty list|$\\
+	\For{$k = 0$; $k < N/2$}{
+		$z = e^{-2k\pi i / N} = \cos(\frac{-2k\pi}{N}) + i \sin(\frac{-2k\pi}{N})$\\
+		$Y_k = q_k + zr_k$\\
+		$Y_{k + N/2} = q_k - zr_k$\\
+		$k \leftarrow k + 1$\\
 	}
 	\Return Y
 	\caption{The Fast Fourier Transform (FFT) algorithm
 \label{alg:fft}}
 \end{algorithm}
 
-In order to analyse the complexity of the FFT algorithm, we will apply the \emph{master theorem} - as shown in the lectures of this module. The time taken for the FFT algorithm is proportional to the following recurrence relation:
-$$T(1) = 1$$
-$$T(n) = 2T(\frac{n}{2}) + \frac{n}{2}$$
-where $T(n)$ is the time taken for an input list of size $n$.
+In order to analyse the complexity of the FFT algorithm, we will apply the \emph{master theorem} - as shown in the lectures of this module. The motivation to do so is that the algorithm is recursive, and may be expressed as a recurrence relation. First, we must show what that recurrence relation is, and then figure out which case of the master theorem it lies in.
+\\\\
+The time taken for the FFT algorithm is proportional to the following recurrence relation:
+$$T(n) = 2T(\frac{n}{2}) + \Theta(n)$$
+where $T(n)$ is the time taken for an input list of size $n$. The reasoning behind this is clear from the pseudocode in algorithm \ref{alg:fft}. The first term of the recurrence relation, $2T(\frac{n}{2})$ arises because, as algorithm \ref{alg:fft} shows, two recursions of itself are computed on an input which is \emph{half} the size of the original. I.e. $\verb|FFT|$ is computed for all items in the input with an even index, and the same again for all items with an odd index.
 
-\subsection{Average Case Analysis}
+After the recursion, computation is done to find multiple \emph{roots of unity}. Similarly to the case of algorithm \ref{alg:dft}, we shall say that this takes a constant amount of time to evaluate, as it runs a fixed set of operations on an item of data with a fixed size. This computation happens precisely $N/2$ times, except in the very specific case that $N = 1$ which is constant. However this special case still applies to the lower bound of $\Omega(n)$ because it is only the case when $n = 1$ and $\Omega(n) = \Omega(1)$ anyway. Hence, the second term - the computational overhead after that of recursion - is of the order $\Omega(n)$, and $O(n) \Rightarrow \Theta(n)$; bringing us to the recurrence relation shown.
+\\\\
+Given this recurrence relation, we must next find out which case of the master theorem (one, two, or three) applies.
+\paragraph{Case 1}
+For a recurrence relation of the form...
+$$T(n) = aT(\frac{n}{b}) + f(n)$$
+...the following statement must also apply in case one:
+\[
+f(n) = O(n^{\log_b{a - \epsilon}}) \text{ where } \epsilon > 0
+\]
+We know the values of $a$ and $b$ to both be $2$, it is easy to see. But, the second term, $\Theta(n)$ does not apply to case one because $\Theta(n) = O(n^{\log_2{2 - \epsilon}})$ is only the case when $\epsilon = 0$.
+
+\paragraph{Case 2}
+Next, the following statement must apply in case two:
+\[
+f(n) = O(n^{\log_b{a}}\log^k{n}) \text{ for some } k \geq 0
+\]
+Using the known values of $a$ and $b$, and selecting a value of $k = 0$, we get:
+\[
+O(n(\log{n})^0) = O(n)
+\]
+showing that our second term, $\Theta(n)$ satisfies case two.
+
+\paragraph{Conclusion}
+For case two of the master theorem, the complexity is asymptotically tightly bound as $\Theta(n^{log_b{a}}\log^{k + 1}n)$. Substituting the values from the above discussion, $a = 2$, $b = 2$, $k = 0$ we find that the complexity for FFT is $$\Theta(n\log{n})$$
+
+\subsection{Average Case Analysis}\label{sec:fft-average}
+TODO show plot and explain.
 
 \section{Empirical Observation for the DFT/FFT Threshold}\label{sec:threshold}
+For the sake of comparison, the two average cases described in sections \ref{sec:dft-average} and \ref{sec:fft-average} are shown here in the same plot.
 \begin{figure}[h]
 	\begin{center}
 		\begin{tabular}{ | c | c | c | }
 			\hline
 			specification & PC1 Value & PC2 Value \\
 			\hline
-			CPU & x86\_64 Intel(R) i7-4712HQ CPU @ 2.30GHz & x86\_64 Intel(R) i5-3470S CPU @ 2.90GHz\\
+			CPU & x86\_64 Intel(R) i7-4712HQ @ 2.30GHz & x86\_64 Intel(R) i5-3470S @ 2.90GHz\\
 			\hline
-			RAM & 16GB = 2 $\times$ 8GB @ 1600MHz DDR3 & \\ 
+			RAM & 16GB = 2 $\times$ 8GB @ 1600MHz DDR3 & TODO add RAM specs \\ 
 			\hline
-			OS & Ubuntu \emph{xenial} 16.04.2 & \\
+			OS & Ubuntu \emph{xenial} 16.04.2 & Fedora release 24\\
 			\hline
 			Java Version & 1.8.0\_121 & 1.8.0\_121\\
 			\hline
