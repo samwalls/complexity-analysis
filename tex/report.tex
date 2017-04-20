@@ -1,6 +1,8 @@
 \documentclass[]{article}
 \usepackage{times}
 \usepackage[margin=1in]{geometry}
+\usepackage{algorithm2e}
+\usepackage{dsfont}
 
 %opening
 \title{CS3052 - Computational Complexity -\\Analysis of the Discrete Fourier Transform}
@@ -11,10 +13,37 @@
 \maketitle
 
 \section{Overview}
-\section{DFT Analysis}
-\section{FFT Analysis}
-\section{Empirical Measurement for the DFT/FFT Threshold}
-asdasd
+In this report, we give a look to each provided algorithm in turn. First, an \emph{a priori} analysis is provided for the worst-case time complexity of each - and subsequently, an empirical analysis of the average case of time complexity is provided.
+\\\\
+Afterwards, an observation of the threshold for which FFT outperforms naive DFT is described in section \ref{sec:threshold}.
+\section{DFT Analysis}\label{sec:dft}
+\subsection{Worst Case Time Complexity}
+First, the algorithm in question is shown in pseudocode in figure \ref{alg:dft}.
+\begin{algorithm}[h]
+	\KwIn{$x_0, x_1, ..., x_{N-1} : x \in \mathds{C}$}
+	$X = \verb|the empty list|$\\
+	\For{$i = 0$; $i < N$}{
+		$X_i = 0$\\
+		\For{$j = 0$; $j < N$}{
+			$z = x_n e^{-2kn\pi i / N} = x_n(\cos(\frac{-2kn\pi}{N}) + i \sin(\frac{-2kn\pi}{N}))$\\
+			$X_i \leftarrow X_i + z$\\
+			$j \leftarrow j + 1$\\
+		}
+		$i \leftarrow i + 1$\\
+	}
+	\KwResult{X}
+\caption{The naive DFT algorithm\label{alg:dft}}
+\end{algorithm}
+
+For this algorithm, the worst-case time complexity is quite clear. As can be seen in the pseudocode, the algorithm contains one \emph{for-loop} nested inside another - both of which iterate $N$ times, where $N$ is the size of the input list. Hence, the total number of evaluations of the inner loop is $N^2$.
+
+Knowing that the code within the loop does not break at an early point - we can say that the time taken for an input list of size $n$, $T(n)$, is at the least, proportional to $n^2$. Now, with these facts in mind, it is reasonable to assume that the algorithm is of order $O(n^2)$ in worst-case time complexity.
+
+\subsection{Average Case Analysis}
+\section{FFT Analysis}\label{sec:fft}
+\subsection{Worst Case Time Complexity}
+\subsection{Average Case Analysis}
+\section{Empirical Observation for the DFT/FFT Threshold}\label{sec:threshold}
 \begin{figure}[h]
 	\begin{center}
 		\begin{tabular}{ | c | c | }
@@ -27,7 +56,7 @@ asdasd
 			\hline
 			OS & Ubuntu \emph{xenial} 16.04.2 \\
 			\hline
-			Java Version & asd \\
+			Java Version & 1.8.0\_121 \\
 			\hline
 		\end{tabular}
 	\end{center}
