@@ -21,47 +21,79 @@ Afterwards, an observation of the threshold for which FFT outperforms naive DFT 
 First, the algorithm in question is shown in pseudocode in figure \ref{alg:dft}.
 \begin{algorithm}[h]
 	\KwIn{$x_0, x_1, ..., x_{N-1} : x \in \mathds{C}$}
-	$X = \verb|the empty list|$\\
-	\For{$i = 0$; $i < N$}{
-		$X_i = 0$\\
-		\For{$j = 0$; $j < N$}{
-			$z = x_n e^{-2kn\pi i / N} = x_n(\cos(\frac{-2kn\pi}{N}) + i \sin(\frac{-2kn\pi}{N}))$\\
-			$X_i \leftarrow X_i + z$\\
-			$j \leftarrow j + 1$\\
+	$Y = \verb|the empty list|$\\
+	\For{$j = 0$; $j < N$}{
+		$Y_j = 0$\\
+		\For{$k = 0$; $k < N$}{
+			$z = x_k e^{-2kn\pi i / N} = x_n(\cos(\frac{-2kn\pi}{N}) + i \sin(\frac{-2kn\pi}{N}))$\\
+			$Y_j \leftarrow Y_j + z$\\
+			$k \leftarrow k + 1$\\
 		}
-		$i \leftarrow i + 1$\\
+		$j \leftarrow j + 1$\\
 	}
-	\KwResult{X}
+	\Return{X}
 \caption{The naive DFT algorithm\label{alg:dft}}
 \end{algorithm}
 
 For this algorithm, the worst-case time complexity is quite clear. As can be seen in the pseudocode, the algorithm contains one \emph{for-loop} nested inside another - both of which iterate $N$ times, where $N$ is the size of the input list. Hence, the total number of evaluations of the inner loop is $N^2$.
+	
+Knowing that the code within the loop does not break at an early point - we can say that the time taken for an input list of size $n$, $T(n)$, is at the least, proportional to $n^2$. The evaluation of the inner loop will be of a constant factor, this is because the operations, $\sin$, $\cos$, addition, multiplication etc. will always take the same time within this context. I.e. we do not use arbitrary precision floating point numbers, the size is \emph{fixed}. So, it is reasonable to say that the inner loop is of a constant order complexity.
 
-Knowing that the code within the loop does not break at an early point - we can say that the time taken for an input list of size $n$, $T(n)$, is at the least, proportional to $n^2$. Now, with these facts in mind, it is reasonable to assume that the algorithm is of order $O(n^2)$ in worst-case time complexity.
+Now we know that: the inner loop will always run $N^2$ times; and that the evaluation of the inner loop is of the order $O(1)$ with respect to a single element of the input list. With all of these facts in mind, it is reasonable to assume that the naive DFT algorithm is of the order $O(n^2)$ in the worst case, where $n$ is the length of the input list. Not only this, but the average case, and even the best case, should be more or less the same as the worst case - this is because there is no room for pathological behaviour in the algorithm, it \emph{always} runs the inner loop $N^2$ times. That is to say, the algorithm is $\Omega(n^2)$, and $O(n^2)$, thus also $\Theta(n^2)$.
 
 \subsection{Average Case Analysis}
+
 \section{FFT Analysis}\label{sec:fft}
+
 \subsection{Worst Case Time Complexity}
+As before, the algorithm in question is shown in pseudocode in figure \ref{alg:fft}.
+\begin{algorithm}[h]
+	\KwIn{$x_0, x_1, ..., x_{N-1} : x \in \mathds{C}$}
+	\If{N = 1}{
+		\Return $x_0$
+	}
+	\If{}{
+		\Return error: $N$ should be even
+	}
+	$q = \verb|FFT(all even terms in input list)|$\\
+	$r = \verb|FFT(all odd terms in input list)|$\\
+	Y
+	\For{$j = 0$; $j < N/2$}{
+		$z = r_n e^{-2kn\pi i / N} = x_n(\cos(\frac{-2kn\pi}{N}) + i \sin(\frac{-2kn\pi}{N}))$\\
+		$Y_j \leftarrow Y_j + z$\\
+		$Y_{j + N/2} \leftarrow Y_j - z$\\
+		$j \leftarrow j + 1$\\
+	}
+	\Return Y
+	\caption{The Fast Fourier Transform (FFT) algorithm
+\label{alg:fft}}
+\end{algorithm}
+
+In order to analyse the complexity of the FFT algorithm, we will apply the \emph{master theorem} - as shown in the lectures of this module. The time taken for the FFT algorithm is proportional to the following recurrence relation:
+$$T(1) = 1$$
+$$T(n) = 2T(\frac{n}{2}) + \frac{n}{2}$$
+where $T(n)$ is the time taken for an input list of size $n$.
+
 \subsection{Average Case Analysis}
+
 \section{Empirical Observation for the DFT/FFT Threshold}\label{sec:threshold}
 \begin{figure}[h]
 	\begin{center}
-		\begin{tabular}{ | c | c | }
+		\begin{tabular}{ | c | c | c | }
 			\hline
-			specification & value \\
+			specification & PC1 Value & PC2 Value \\
 			\hline
-			CPU & x86\_64 Intel(R) Core(TM) i7-4712HQ CPU (4 physical cores) @ 2.30GHz \\
+			CPU & x86\_64 Intel(R) i7-4712HQ CPU @ 2.30GHz & x86\_64 Intel(R) i5-3470S CPU @ 2.90GHz\\
 			\hline
-			RAM & 16GB = 2 $\times$ 8GB @ 1600MHz DDR3\\ 
+			RAM & 16GB = 2 $\times$ 8GB @ 1600MHz DDR3 & \\ 
 			\hline
-			OS & Ubuntu \emph{xenial} 16.04.2 \\
+			OS & Ubuntu \emph{xenial} 16.04.2 & \\
 			\hline
-			Java Version & 1.8.0\_121 \\
+			Java Version & 1.8.0\_121 & 1.8.0\_121\\
 			\hline
 		\end{tabular}
 	\end{center}
 	\caption{relevant system specifications used in provided analysis\label{fig:specs}}
 \end{figure}
-
 
 \end{document}
