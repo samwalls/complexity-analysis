@@ -4,6 +4,8 @@
 \usepackage{algorithm2e}
 \usepackage{dsfont}
 \usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[round, sort, numbers]{natbib}
 
 %opening
 \title{CS3052 - Computational Complexity -\\Analysis of the Discrete Fourier Transform}
@@ -17,9 +19,10 @@
 In this report, we give a look to each provided algorithm in turn. First, an \emph{a priori} analysis is provided for the worst-case time complexity of each - and subsequently, an empirical analysis of the average case of time complexity is provided.
 \\\\
 Afterwards, an observation of the threshold for which FFT outperforms naive DFT is described in section \ref{sec:threshold}.
+
 \section{DFT Analysis}\label{sec:dft}
 \subsection{Worst Case Time Complexity}
-First, the algorithm in question is shown in pseudocode in figure \ref{alg:dft}.
+First, the algorithm in question is shown in pseudocode in algorithm \ref{alg:dft}.
 \begin{algorithm}[h]
 	\KwIn{$x_0, x_1, ..., x_{N-1} : x \in \mathds{C}$}
 	$Y = \verb|the empty list|$\\
@@ -48,7 +51,7 @@ TODO show plot and explain.
 \section{FFT Analysis}\label{sec:fft}
 
 \subsection{Worst Case Time Complexity}
-As before, the algorithm in question is shown in pseudocode in figure \ref{alg:fft}.
+As before, the algorithm in question is shown in pseudocode in algorithm \ref{alg:fft}.
 \begin{algorithm}[h]
 	\KwIn{$x_0, x_1, ..., x_{N-1} : x \in \mathds{C}$}
 	\If{N = 1}{
@@ -126,5 +129,9 @@ For the sake of comparison, the two average cases described in sections \ref{sec
 	\end{center}
 	\caption{relevant system specifications used in provided analysis\label{fig:specs}}
 \end{figure}
+\nocite{*}
+
+\bibliography{ref}
+\bibliographystyle{apalike}
 
 \end{document}
