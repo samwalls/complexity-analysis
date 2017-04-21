@@ -205,6 +205,33 @@ For the sake of comparison, the two average cases described in sections \ref{sec
 	\end{minipage}
 \end{figure}
 
+\begin{figure}[!htbp]
+	\centering
+	\begin{minipage}[b]{0.4\textwidth}
+		\begin{tikzpicture}
+		\begin{axis}[ xmin=0, ymin=0, xlabel=Input Length, ylabel=Time ($\mu$s), legend style={at={(1,-0.1)},anchor=north} ]
+		\addplot table [ignore chars=\%, x=Param: inputLength, y=score per input length, col sep=comma] {csv/pc1-result-fft.csv};
+		\addlegendentry{PC1}
+		\addplot table [ignore chars=\%, x=Param: inputLength, y=score per input length, col sep=comma] {csv/pc2-result-fft.csv};
+		\addlegendentry{PC2}
+		\end{axis}
+		\end{tikzpicture}
+		\caption{$\frac{T}{N}$ against input length $N$\label{fig:compar6}}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.4\textwidth}
+		\begin{tikzpicture}
+		\begin{axis}[ xmin=0, ymin=0, xlabel=Input Length, ylabel=Time ($\mu$s), legend style={at={(1,-0.1)},anchor=north} ]
+		\addplot table [ignore chars=\%, x=Param: inputLength, y=score per input squared, col sep=comma] {csv/pc1-result-dft.csv};
+		\addlegendentry{PC1}
+		\addplot table [ignore chars=\%, x=Param: inputLength, y=score per input squared, col sep=comma] {csv/pc2-result-dft.csv};
+		\addlegendentry{PC2}
+		\end{axis}
+		\end{tikzpicture}
+		\caption{$\frac{T}{N^2}$ against input length $N$\label{fig:compar7}}
+	\end{minipage}
+\end{figure}
+
 \begin{figure}[h]
 	\begin{center}
 		\begin{tabular}{ | c | c | c | }

@@ -1,11 +1,11 @@
-Benchmark,Mode,Threads,Samples,Score,Score Error (99.9%),Unit,Param: inputLength
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,0.015057,0.00048,us/op,1
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,1.696724,0.053441,us/op,2
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,8.593132,1.98621,us/op,4
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,20.189722,0.546076,us/op,8
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,54.124207,1.479944,us/op,16
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,140.381977,5.627518,us/op,32
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,330.565716,9.555035,us/op,64
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,773.160445,22.144135,us/op,128
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,1785.069418,51.390675,us/op,256
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,4038.812194,117.057001,us/op,512
+Benchmark,Mode,Threads,Samples,Score,Score Error (99.9%),Unit,Param: inputLength,score per input length
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,0.015057,0.00048,us/op,1,0.015057
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,1.696724,0.053441,us/op,2,0.848362
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,8.593132,1.98621,us/op,4,2.148283
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,20.189722,0.546076,us/op,8,2.52371525
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,54.124207,1.479944,us/op,16,3.3827629375
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,140.381977,5.627518,us/op,32,4.3869367813
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,330.565716,9.555035,us/op,64,5.1650893125
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,773.160445,22.144135,us/op,128,6.0403159766
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,1785.069418,51.390675,us/op,256,6.9729274141
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,8,30,4038.812194,117.057001,us/op,512,7.8883050664
