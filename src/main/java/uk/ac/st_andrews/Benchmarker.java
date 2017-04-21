@@ -5,6 +5,7 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.openjdk.jmh.runner.options.TimeValue;
 import uk.ac.st_andrews.complexity.fourier.Complex;
 import uk.ac.st_andrews.complexity.fourier.DFT;
 import uk.ac.st_andrews.complexity.fourier.FFT;
@@ -27,8 +28,8 @@ public class Benchmarker {
         }
 
         private Complex nextRandomComplex() {
-            // make a random complex number, with real and imaginary components between -10 and 10
-            return new Complex(rand.nextDouble(), rand.nextDouble());
+            // make a random complex number, with real and imaginary components between -1 and 1
+            return new Complex(rand.nextDouble() - 0.5, rand.nextDouble() - 0.5);
         }
 
         public Complex[] randomInputs() {
@@ -45,7 +46,7 @@ public class Benchmarker {
     /**
      * set of input lengths which get benchmarked for
      */
-    @Param({"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048", "4096", "8192"})
+    @Param({/*"1", "2", "4", "8", "16", "32", "64", "128", "256",*/ "512"})
     private int inputLength;
 
     /**
@@ -62,14 +63,14 @@ public class Benchmarker {
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
-    @OutputTimeUnit(TimeUnit.NANOSECONDS)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     public void measureDft() {
         Complex[] output = DFT.dft(inputs());
     }
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
-    @OutputTimeUnit(TimeUnit.NANOSECONDS)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
     public void measureFft() {
         Complex[] output = FFT.fft(inputs());
     }
@@ -77,12 +78,14 @@ public class Benchmarker {
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(Benchmarker.class.getSimpleName())
-                .measurementBatchSize(5)
+                .measurementBatchSize(10)
                 .measurementIterations(10)
-                .warmupBatchSize(5)
+                .warmupBatchSize(10)
                 .warmupForks(3)
                 .warmupIterations(5)
                 .forks(3)
+                .measurementTime(TimeValue.seconds(2))
+                .warmupTime(TimeValue.seconds(2))
                 .threads(Runtime.getRuntime().availableProcessors()) // use as many threads as possible
                 .build();
         new Runner(opt).run();
