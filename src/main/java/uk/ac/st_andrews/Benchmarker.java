@@ -42,14 +42,15 @@ public class Benchmarker {
 
     private Complex[] randomInput;
 
-    @Param({"1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "20", "30", "40", "50", "60", "70", "80", "90",
-            "100", "200", "300", "400", "500", "600", "700", "800", "900",
-            "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000",
-            "10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000"
-    })
+    /**
+     * set of input lengths which get benchmarked for
+     */
+    @Param({"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048", "4096", "8192"})
     private int inputLength;
 
+    /**
+     * This is run before each benchmark method
+     */
     @Setup
     public void setup() {
         randomInput = new RandomComplexGenerator(inputLength).randomInputs();
@@ -76,7 +77,13 @@ public class Benchmarker {
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(Benchmarker.class.getSimpleName())
-                .forks(1)
+                .measurementBatchSize(5)
+                .measurementIterations(10)
+                .warmupBatchSize(5)
+                .warmupForks(3)
+                .warmupIterations(5)
+                .forks(3)
+                .threads(Runtime.getRuntime().availableProcessors()) // use as many threads as possible
                 .build();
         new Runner(opt).run();
     }

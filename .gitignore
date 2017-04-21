@@ -303,3 +303,6 @@ TSWLatexianTemp*
 
 # latex output
 tex/*.pdf
+
+# benchmark output
+results.csv
