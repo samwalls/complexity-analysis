@@ -1,0 +1,11 @@
+Benchmark,Mode,Threads,Samples,Score,Score Error (99.9%),Unit,Param: inputLength
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,0.668503,0.003314,us/op,1
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,2.904074,0.013069,us/op,2
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,13.663601,0.672893,us/op,4
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,66.274011,0.146648,us/op,8
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,300.561187,0.554913,us/op,16
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,1312.352275,4.297526,us/op,32
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,5344.103694,46.886947,us/op,64
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,21869.656562,319.044958,us/op,128
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,89975.606523,881.196012,us/op,256
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,4,30,398712.554148,916.655277,us/op,512
