@@ -1,6 +1,7 @@
 package uk.ac.st_andrews;
 
 import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -87,6 +88,8 @@ public class Benchmarker {
                 .measurementTime(TimeValue.seconds(2))
                 .warmupTime(TimeValue.seconds(2))
                 .threads(Runtime.getRuntime().availableProcessors()) // use as many threads as possible
+                .resultFormat(ResultFormatType.CSV)
+                .output("result.csv")
                 .build();
         new Runner(opt).run();
     }
