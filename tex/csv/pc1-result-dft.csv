@@ -1,11 +1,11 @@
-Benchmark,Mode,Threads,Samples,Score,Score Error (99.9%),Unit,Param: inputLength,score per input squared
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,1.109828,0.19374,us/op,1,1.109828
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,4.929314,0.690478,us/op,2,1.2323285
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,23.996833,0.70509,us/op,4,1.4998020625
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,122.107368,24.456548,us/op,8,1.907927625
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,506.425575,44.193365,us/op,16,1.9782249023
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,2548.682651,631.259926,us/op,32,2.4889479014
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,8855.576108,256.788297,us/op,64,2.1620058857
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,35798.788501,1027.942827,us/op,128,2.1849846497
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,148043.798135,3891.928294,us/op,256,2.2589690878
-uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,660586.520086,2471.941872,us/op,512,2.5199375919
+Benchmark,Mode,Threads,Samples,Unit,Param: inputLength,score per input squared,Score,Score Error (99.9%)
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,1,1.109828,1.109828,0.19374
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,2,1.2323285,4.929314,0.690478
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,4,1.499802063,23.996833,0.70509
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,8,1.907927625,122.107368,24.456548
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,16,1.978224902,506.425575,44.193365
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,32,2.488947901,2548.682651,631.259926
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,64,2.162005886,8855.576108,256.788297
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,128,2.18498465,35798.7885,1027.942827
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,256,2.258969088,148043.7981,3891.928294
+uk.ac.st_andrews.Benchmarker.measureDft,avgt,8,30,us/op,512,2.519937592,660586.5201,2471.941872

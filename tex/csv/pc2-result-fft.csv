@@ -1,11 +1,11 @@
-Benchmark,Mode,Threads,Samples,Score,Score Error (99.9%),Unit,Param: inputLength,score per input length
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,0.009421,0.000009,us/op,1,0.009421
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,1.041423,0.003538,us/op,2,0.5207115
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,3.622715,0.009279,us/op,4,0.90567875
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,11.051466,0.057435,us/op,8,1.38143325
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,31.235174,0.695192,us/op,16,1.952198375
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,79.067383,0.223937,us/op,32,2.4708557188
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,206.483234,11.058219,us/op,64,3.2263005313
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,468.433036,5.076113,us/op,128,3.6596330938
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,1085.830157,10.270495,us/op,256,4.2415240508
-uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,2458.324021,20.826056,us/op,512,4.8014141035
+Benchmark,Mode,Threads,Samples,Score,Score Error (99.9%),Unit,Param: inputLength,score per input length,log fit coefficient,log fit constant
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,0.009421,0.000009,us/op,1,0.009421,0.7782,-0.1103
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,1.041423,0.003538,us/op,2,0.5207115,,
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,3.622715,0.009279,us/op,4,0.90567875,,
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,11.051466,0.057435,us/op,8,1.38143325,,
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,31.235174,0.695192,us/op,16,1.952198375,,
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,79.067383,0.223937,us/op,32,2.470855719,,
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,206.483234,11.058219,us/op,64,3.226300531,,
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,468.433036,5.076113,us/op,128,3.659633094,,
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,1085.830157,10.270495,us/op,256,4.241524051,,
+uk.ac.st_andrews.Benchmarker.measureFft,avgt,4,30,2458.324021,20.826056,us/op,512,4.801414104,,
