@@ -319,11 +319,11 @@ But, as shown in figure \ref{fig:compar6}, the different machine specs does give
 
 
 \section{Evaluation}
-I think that the benchmarks outlined here provide fairly detailed analysis, albeit that the number of forks, warmups, and iterations could be higher to increase confidence that the data is properly representative (I had limited time, once I had created the benchmarker). I would like to have done more with curve fitting, perhaps in something more powerful than \emph{Microsoft Excel 2013}. The way I approach finding an approximation of the time taken for FFT is a rather \emph{visual} approach to \emph{decomposition} - however, I personally do not know of a sufficient method to fit curves of the form $n\log{n}$.
+I think that the benchmarks outlined here provide fairly detailed analysis, albeit that the number of forks, warmups, and iterations could be higher to increase confidence that the data is properly representative (I had limited time, once I had created the benchmarker). I would like to have done more with curve fitting, perhaps in something more powerful than \emph{Microsoft Excel 2013}. The way I approach finding an approximation of the time taken for FFT is a rather \emph{visual} approach to \emph{decomposition} - however, I personally do not know of a more sufficient method to fit curves of the form $n\log{n}$.
 \\\\
 I would like to have experimented with more input points, however the benchmarking time would return "Infinity" for input lists of approximately 1000 in length. I suspect that the time taken to measure has gone completely out of the time unit's precision range in this case.
 \\\\
-However, one of the most annoying facts about this submission is that the measured results are not automatically fed into a specific set of analysis - such as that which is seen in the report. Indeed, I had to manually move around some of the columns in the output CSV files in order for the given plots here to display in latex (by CSV input). I believe something like \emph{R} or \emph{MATLAB} would be perfect for alleviating this.
+However, one of the most annoying facts about this submission is that the measured results are not automatically fed into a specific set of analysis - such as that which is seen in the report. Indeed, I had to manually move around some of the columns in the output CSV files in order for the given plots here to display in latex (by CSV input). I believe tools like \emph{R} or \emph{MATLAB} would be perfect for alleviating this.
 \bibliography{ref}
 \bibliographystyle{apalike}
 
